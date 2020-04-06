@@ -7,7 +7,7 @@ var app = {
       app.loadCountryList();
 
     // Fonction qui gere les ecouteurs d'event
-    app.initEventListeners();
+    // app.initEventListeners();
   },
 
   loadCountryList: function() {
@@ -60,9 +60,8 @@ var app = {
     const countryListItemTemplateContentElement = countryListItemTemplateContent.firstElementChild;
     const countryListItem = countryListItemTemplateContentElement.cloneNode(true);
     
-    // console.log(countryListItem);
-    const title = countryListItem.querySelector('.countryTitle');
-    title.textContent = data.Country;
+    console.log(countryListItem);
+    countryListItem.textContent = data.Country;
     countryListItem.dataset.Date = data.Date;
     countryListItem.dataset.Country = data.Country;
     countryListItem.dataset.NewConfirmed = data.NewConfirmed;
@@ -77,31 +76,34 @@ var app = {
 
 
     // Add it to the array
-    const countryList = document.querySelector('.countries-list');
-    countryList.appendChild(countryListItem);
+    const dropdownContentList = document.querySelector('.dropdown-content');
+    dropdownContentList.appendChild(countryListItem);
 
-    const showButton = countryListItem.querySelector('.showcountry');
-    showButton.addEventListener('click', app.fillSeeModal);
+    const dropdownButtonList = document.querySelector('.dropdown');
+    dropdownButtonList.addEventListener('click', app.toggleDropdownMenu);
+
+    countryListItem.addEventListener('click', app.fillSeeModal);
+
+    // close modal
+    const closeModal = document.querySelectorAll('.closeModal');
+    closeModal.forEach(button => button.addEventListener('click', app.closeModal));
 
   },
 
-  openShowCountry: function() {
-    document.querySelector('.seeCountryModal').classList.add('is-active');
+  toggleDropdownMenu: function() {
+    document.querySelector('.dropdown').classList.toggle('is-active');
   },
   
   initEventListeners: function() {
     const closeButtons = document.querySelectorAll('.closeModal');
     closeButtons.forEach(button => button.addEventListener('click', app.closeModal));
   },
-  
-  closeModal: function() {
-    document.querySelector('.seeCountryModal').classList.remove('is-active');
-  },
 
   fillSeeModal: function(e) {
 
+    console.log(e.target);
     // seeCountryModal
-    const countryElement = e.target.closest('.country');
+    const countryElement = e.target;
     const seeCountryModal = document.querySelector('.seeCountryModal');
     
         const countryListItemTitle = seeCountryModal.querySelector('.country');
@@ -123,6 +125,14 @@ var app = {
         countryListItemTotalRecovered.textContent = countryElement.dataset.TotalRecovered;
 
         app.openShowCountry();
+  },
+
+  openShowCountry: function() {
+    document.querySelector('.seeCountryModal').classList.add('is-active');
+  },
+
+  closeModal: function() {
+    document.querySelector('.seeCountryModal').classList.remove('is-active');
   },
 
   showOverlay: function() {

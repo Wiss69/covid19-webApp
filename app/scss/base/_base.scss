@@ -1,3 +1,22 @@
 body {
     font-size: $font-size;
 }
+
+.dropdown {
+    width: 100%;
+  
+    .dropdown-trigger {
+      width: 100%
+    }
+
+    .dropdown-menu {
+        width: 100%
+      }
+  
+    .button {
+      display: flex;
+      width: 100%;
+      justify-content: space-between
+    }
+  
+  }

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WP REST API JS</title>
   <link rel="stylesheet" href="css/app.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body> 
     <header class="hero is-primary">
@@ -36,18 +37,28 @@
             <table class="table is-striped is-fullwidth">
                 <thead>
                     <tr>
-                        <th>List of countries</th>
+                        <th class="has-text-centered">List of countries</th>
                     </tr>
                 </thead>
                 <tbody class="countries-list">
-                </tbody>
-                <tfoot class="is-hidden loadNextRecipeListContainer">
                     <tr>
-                        <td class="has-text-centered" colspan="2">
-                            <button type="button" class="button is-light is-large loadNextRecipeList">Charger la suite</button>
-                        </td>
+                        <th>
+                            <div class="dropdown">
+                                <div class="dropdown-trigger">
+                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                    <span>Select a country</span>
+                                    <span class="icon is-small">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content"></div>
+                                </div>
+                            </div>
+                        </th>
                     </tr>
-                </tfoot>
+                </tbody>
             </table>
         </div>
     </main>
@@ -85,14 +96,7 @@
     </div>
 
     <template id="country-list-item-template">
-        <tr class="country">
-            <td class="countryTitle"></td>
-            <td>
-                <div class="buttons">
-                    <button class="button is-success is-large showcountry"><span class="icon"><i class="fa fa-eye"></i></span><span>Look</span></button>
-                </div>
-            </td>
-        </tr>
+        <a href="#" class="dropdown-item countryTitle"></a>
     </template>
 
     <script src="js/app.js"></script>
